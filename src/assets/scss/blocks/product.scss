@@ -1,0 +1,24 @@
+@use "../ds-system/ds-typography";
+@use "../mixins/m_clear-list";
+
+.product {
+  display: flex;
+  align-items: center;
+}
+
+.product__text {
+  margin-left: 15px;
+
+  h2 {
+    @include ds-typography.b-s18-h21;
+
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    @include m_clear-list.clear-list;
+    @include ds-typography.l-s11-h13;
+  }
+}
+

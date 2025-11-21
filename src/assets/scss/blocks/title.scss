@@ -1,0 +1,18 @@
+@use "../ds-system/ds-colors";
+@use "../ds-system/ds-typography";
+
+.title {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+
+  color: ds-colors.$black;
+
+  &--big {
+    @include ds-typography.b-s36-h42;
+  }
+
+  &--small {
+    @include ds-typography.b-s18-h21;
+  }
+}

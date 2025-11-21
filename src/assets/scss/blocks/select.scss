@@ -1,0 +1,36 @@
+@use "../ds-system/ds-colors";
+@use "../ds-system/ds-typography";
+
+.select {
+  @include ds-typography.r-s16-h19;
+
+  display: block;
+
+  margin: 0;
+  padding: 8px 16px;
+  padding-right: 30px;
+
+  cursor: pointer;
+  transition: 0.3s;
+
+  color: ds-colors.$black;
+  border: 1px solid ds-colors.$purple-400;
+  border-radius: 8px;
+  outline: none;
+  background-color: ds-colors.$silver-100;
+  background-image: url("../img/select.svg");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+
+  font-family: inherit;
+
+  appearance: none;
+
+  &:hover {
+    border-color: ds-colors.$orange-100;
+  }
+
+  &:focus {
+    border-color: ds-colors.$green-500;
+  }
+}
