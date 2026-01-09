@@ -1,17 +1,20 @@
 <template>
   <header class="header">
     <div class="header__logo">
-      <a href="index.html" class="logo">
+      <a class="logo" @click="router.push({ name: 'Home' })">
         <img :src="logo" alt="V!U!E! Pizza logo" width="90" height="40" />
       </a>
     </div>
     <div class="header__cart">
-      <a style="cursor: pointer" @click="router.push({ name: 'Bin' })"
+      <a @click="router.push({ name: 'Bin' })"
         >{{ pizzaStore.currentFullPrice }} ₽</a
       >
     </div>
     <div class="header__user">
-      <a href="#" class="header__login"><span>Войти</span></a>
+      <a @click="router.push({ name: 'Profile' })">
+        <span v-if="userData">{{ userData.name }}</span>
+        <span v-else>Загрузка...</span>
+      </a>
     </div>
   </header>
 </template>
@@ -19,9 +22,16 @@
 import logo from "@assets/img/logo.svg";
 import { usePizzaStore } from "@/stores/pizza";
 import { useRouter } from "vue-router";
+import { ref, onMounted } from "vue";
+import { MainService } from "@/api/main-service";
 
 const pizzaStore = usePizzaStore();
 const router = useRouter();
+const userData = ref(null);
+
+onMounted(async () => {
+  userData.value = await MainService.whoAmI();
+});
 </script>
 <style scoped lang="scss">
 @import "@assets/scss/ds-system/ds-typography";
@@ -139,22 +149,6 @@ const router = useRouter();
     width: 32px;
     height: 32px;
     margin-right: 8px;
-
-    content: "";
-    vertical-align: middle;
-
-    background: url(@assets/img/login.svg) no-repeat center;
-    background-size: auto 50%;
-  }
-}
-
-.header__login {
-  &::after {
-    display: inline-block;
-
-    width: 32px;
-    height: 32px;
-    margin-left: 8px;
 
     content: "";
     vertical-align: middle;

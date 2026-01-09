@@ -2,7 +2,11 @@
   <div>
     <app-header v-if="!route.meta.noHeader" />
     <main class="layout">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" :key="route.name" />
+        </transition>
+      </router-view>
     </main>
   </div>
 </template>
@@ -14,6 +18,8 @@ const route = useRoute();
 </script>
 <style lang="scss">
 @import "@/assets/scss/app.scss";
+@import "@assets/scss/mixins/m_clear-list";
+@import "@assets/scss/blocks/cart";
 body {
   justify-content: center;
   align-items: center;
@@ -58,5 +64,14 @@ body {
 
     margin: 0 auto;
   }
+}
+
+.fade-enter-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

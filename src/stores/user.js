@@ -12,5 +12,5 @@ export const useUserStore = defineStore("user-store", () => {
     Cookies.set("token", newToken, { expires: 1 });
   }
 
-  return { isAuthorized, setToken };
+  return { isAuthorized, setToken, token };
 });

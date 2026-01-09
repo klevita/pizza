@@ -11,16 +11,16 @@ export class MainService {
   //   "comment": "string"
   // }
   static changeAdress(newAdress) {
-    return apiClient.put(`/adresses/${newAdress.id}`);
+    return apiClient.put(`/addresses/${newAdress.id}`);
   }
   static deleteAdress(id) {
-    return apiClient.post(`/adresses/${id}`);
+    return apiClient.post(`/addresses/${id}`);
   }
   static addAdress(newAdress) {
-    return apiClient.post(`/adresses`, newAdress);
+    return apiClient.post(`/addresses`, newAdress);
   }
   static getAdresses() {
-    return apiClient.get(`/adresses`);
+    return apiClient.get(`/addresses`);
   }
   //[
   //   {

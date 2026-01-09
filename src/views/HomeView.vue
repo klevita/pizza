@@ -21,11 +21,11 @@
                   }"
                 ></div>
                 <input
+                  v-model="pizzaStore.currentPizza.doughId"
                   type="radio"
                   name="dought"
                   :value="id"
                   class="visually-hidden"
-                  v-model="pizzaStore.currentPizza.doughId"
                 />
                 <b>{{ name }}</b>
                 <span>{{ description }}</span>
@@ -54,11 +54,11 @@
                   }"
                 ></div>
                 <input
+                  v-model="pizzaStore.currentPizza.sizeId"
                   type="radio"
                   name="diameter"
                   :value="id"
                   class="visually-hidden"
-                  v-model="pizzaStore.currentPizza.sizeId"
                 />
                 <span>{{ name }}</span>
               </label>
@@ -82,10 +82,10 @@
                   class="radio ingredients__input"
                 >
                   <input
+                    v-model="pizzaStore.currentPizza.sauceId"
                     type="radio"
                     name="sauce"
                     :value="id"
-                    v-model="pizzaStore.currentPizza.sauceId"
                   />
                   <span>{{ name }}</span>
                 </label>
@@ -126,8 +126,8 @@
                       <button
                         type="button"
                         class="counter__button counter__button--plus"
-                        @click="pizzaStore.addIngredient(ingredient)"
                         :disabled="countIngredientsByPizza(ingredient.id) > 2"
+                        @click="pizzaStore.addIngredient(ingredient)"
                       >
                         <span class="visually-hidden">Больше</span>
                       </button>
@@ -143,10 +143,10 @@
           <label class="input">
             <span class="visually-hidden">Название пиццы</span>
             <input
+              v-model="pizzaStore.currentPizza.name"
               type="text"
               name="pizza_name"
               placeholder="Введите название пиццы"
-              v-model="pizzaStore.currentPizza.name"
             />
           </label>
           <div class="content__constructor">
@@ -155,12 +155,14 @@
               :class="foundationClassesMap[pizzaStore.currentSauce?.name]"
             >
               <div class="pizza__wrapper">
-                <div
-                  v-for="ingredientClass in ingredientsClasses"
-                  :key="ingredientClass"
-                  class="pizza__filling"
-                  :class="ingredientClass"
-                ></div>
+                <TransitionGroup name="appear">
+                  <div
+                    v-for="ingredientClass in ingredientsClasses"
+                    :key="ingredientClass"
+                    class="pizza__filling"
+                    :class="ingredientClass"
+                  ></div>
+                </TransitionGroup>
               </div>
             </div>
           </div>
@@ -170,8 +172,8 @@
             <button
               type="button"
               class="button"
-              @click="pizzaStore.pushPizzaToBin()"
               :disabled="!pizzaStore.currentPizza.name"
+              @click="pizzaStore.pushPizzaToBin()"
             >
               Готовьте!
             </button>
@@ -360,5 +362,13 @@ function countIngredientsByPizza(id) {
   position: absolute;
   left: 0;
   top: -2px;
+}
+
+.appear-enter-active {
+  transition: all 0.5s ease;
+}
+
+.appear-enter-from {
+  transform: scale(1.2);
 }
 </style>
